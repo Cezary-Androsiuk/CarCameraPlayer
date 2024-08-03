@@ -15,9 +15,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        console.log("visible: " + fileDialog.visible + ", " + invalidRoot.visible)
         fileDialog.open();
-        console.log("__________________ ater open visible: " + fileDialog.visible + ", " + invalidRoot.visible)
     }
 
 
@@ -25,32 +23,30 @@ ApplicationWindow {
         target: Backend
         function onInvalidSelectedFile()
         {
+            validRoot.visible = false;
             invalidRoot.visible = true;
-            console.log("visible: " + fileDialog.visible + ", " + invalidRoot.visible)
         }
 
         function onValidSelectedFile()
         {
+            invalidRoot.visible = false;
             validRoot.visible = true;
         }
     }
 
     FileDialog {
         id: fileDialog
-        title: "Wybierz plik"
+        title: "Select Front or Back video"
         fileMode: FileDialog.OpenFile
         onAccepted: {
-            console.log("Wybrany plik: " + fileDialog.selectedFile)
             Backend.setSelectedFile(fileDialog.selectedFile)
             root.visible = true;
 
             // move window to top
             root.raise();
             root.requestActivate();
-            console.log("visible: " + fileDialog.visible + ", " + invalidRoot.visible)
         }
         onRejected: {
-            console.log("Dialog został zamknięty bez wyboru pliku")
             Qt.quit()
         }
     }
@@ -99,11 +95,8 @@ ApplicationWindow {
 
         onRetried: {
             console.log("user choosed retry")
-            root.visible = false;
-            invalidRoot.visible = false;
-
+            root.hide()
             fileDialog.open();
-            console.log("__________________ ater open visible: " + fileDialog.visible + ", " + invalidRoot.visible)
         }
 
         onExited: {

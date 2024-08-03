@@ -14,7 +14,6 @@ Backend::Backend(QObject *parent)
 
 void Backend::setSelectedFile(QUrl selectedFile)
 {
-    qDebug() << "selected url in cpp:" << selectedFile;
     this->setSelectedFile(selectedFile.toLocalFile());
 }
 
@@ -23,7 +22,7 @@ void Backend::setSelectedFile(QString selectedFile)
     if(selectedFile == m_selectedFile)
         return;
 
-    qDebug() << "selected file in cpp:" << selectedFile;
+    qDebug() << "selected file:" << selectedFile;
     m_selectedFile = selectedFile;
     emit this->selectedFileChanged();
 }
@@ -49,7 +48,8 @@ void Backend::validateSelectedFile()
     if(!parentDir.exists())
     {
         qDebug() << "directory"<<m_parentDirectory<<"not exist";
-        exit(1);
+        emit this->invalidSelectedFile();
+        return;
     }
 
     qDebug() << "selected file" << m_selectedFile << "is valid";
