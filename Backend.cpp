@@ -109,7 +109,7 @@ void Backend::makePlaylist()
 
 
     /// set current played video index
-    int cpvi = this->initCurentPlayedVideoIndex();
+    int cpvi = this->getInitCurentPlayedVideoIndex();
     this->setCurrentPlayedVideoIndex(cpvi);
 }
 
@@ -154,7 +154,7 @@ void Backend::setCurrentPlayedVideoIndex(int index)
     emit this->currentPlayedVideoIndexChanged();
 }
 
-int Backend::initCurentPlayedVideoIndex() const
+int Backend::getInitCurentPlayedVideoIndex() const
 {
     int cpvi = -1; /// m_currentPlayedVideoIndex
     for(const auto &file : m_playlist)

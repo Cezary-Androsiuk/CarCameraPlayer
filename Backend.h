@@ -33,7 +33,7 @@ public slots:
 private:
     bool isValidFileName(QString fileName, QChar &type) const;
     void setCurrentPlayedVideoIndex(int index);
-    int initCurentPlayedVideoIndex() const;
+    int getInitCurentPlayedVideoIndex() const;
 
     QString m_selectedFile;
     QChar m_selectedFileType;
