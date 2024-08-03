@@ -59,24 +59,24 @@ void Backend::validateSelectedFile()
 void Backend::goToNextVideo()
 {
     int cpvi = m_currentPlayedVideoIndex;
-    qDebug() << "old cpvi:" << cpvi;
+
     if(cpvi >= m_playlist.size()-1)
         cpvi = 0;
     else
         ++ cpvi;
-    qDebug() << "new cpvi:" << cpvi;
+
     this->setCurrentPlayedVideoIndex(cpvi);
 }
 
 void Backend::goToPrevVideo()
 {
     int cpvi = m_currentPlayedVideoIndex;
-    qDebug() << "old cpvi:" << cpvi;
+
     if(cpvi <= 0)
         cpvi = m_playlist.size()-1;
     else
         -- cpvi;
-    qDebug() << "new cpvi:" << cpvi;
+
     this->setCurrentPlayedVideoIndex(cpvi);
 }
 

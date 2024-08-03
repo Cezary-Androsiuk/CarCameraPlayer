@@ -22,6 +22,7 @@ qt_add_qml_module(appCarCameraPlayer
         QML_FILES BetterButtonText.qml
         SOURCES VideoPath.h VideoPath.cpp
         QML_FILES InvalidRoot.qml
+        QML_FILES ValidRoot.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

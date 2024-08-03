@@ -4,48 +4,80 @@ VideoPath::VideoPath(QObject *parent)
     : QObject{parent}
 {}
 
-void VideoPath::addVideoFile(QString videoFile)
+QString VideoPath::getFrontVideoFile() const
+{
+    return m_frontVideoFile;
+}
+
+QString VideoPath::getBackVideoFile() const
+{
+    return m_backVideoFile;
+}
+
+void VideoPath::setVideoFile(QString videoFile)
 {
     /// videoFile should be valid (handled in caller)
 
+    this->buildAlternativeFilePath(videoFile);
+}
+
+void VideoPath::buildAlternativeFilePath(QString videoFile)
+{
     if(videoFile[videoFile.size() -5] == 'F') /// front camera was given
     {
-        m_frontVideoFile = videoFile;
+        this->setFrontVideoFile(videoFile);
 
-        m_backVideoFile = this->findBackInFile(); /// if failed returns QString("")
-        if(m_backVideoFile == "") /// findBackInFile failed
+        QString backVideoFile;
+        backVideoFile = this->findBackInFile(); /// if failed returns QString("")
+
+        if(backVideoFile != "") /// findBackInFile found (the same location)
         {
-            m_backVideoFile = this->findBackOutFile(); /// if failed returns QString("")
-
-            if(m_backVideoFile == "") /// findBackOutFile failed
-            {
-                /// back camera file not found
-                qInfo() << "back camera file not found";
-                return;
-            }
+            qInfo() << "found back file2:" << backVideoFile;
+            this->setBackVideoFile(backVideoFile);
+            return;
         }
+
+        backVideoFile = this->findBackOutFile(); /// if failed returns QString("")
+
+        if(backVideoFile != "") /// findBackOutFile found (in outside location)
+        {
+            qInfo() << "found back file2:" << backVideoFile;
+            this->setBackVideoFile(backVideoFile);
+            return;
+        }
+
+        /// back camera file not found
+        qInfo() << "back camera file not found";
     }
     else /// == 'B' /// back camera
     {
-        m_backVideoFile = videoFile;
+        this->setBackVideoFile(videoFile);
 
-        m_frontVideoFile = this->findFrontInFile(); /// if failed returns QString("")
-        if(m_frontVideoFile == "") /// findFrontInFile failed
+        QString frontVideoFile;
+        frontVideoFile = this->findFrontInFile(); /// if failed returns QString("")
+
+        if(frontVideoFile != "") /// findFrontInFile failed (the same location)
         {
-            m_frontVideoFile = this->findFrontOutFile(); /// if failed returns QString("")
-
-            if(m_frontVideoFile == "") /// findFrontOutFile failed
-            {
-                /// back camera file not found
-                qInfo() << "front camera file not found";
-                return;
-            }
+            qInfo() << "found front file2:" << frontVideoFile;
+            this->setFrontVideoFile(frontVideoFile);
+            return;
         }
-    }
 
+        frontVideoFile = this->findFrontOutFile(); /// if failed returns QString("")
+
+        if(frontVideoFile != "") /// findFrontOutFile failed (in outside location)
+        {
+            qInfo() << "found front file2:" << frontVideoFile;
+            this->setFrontVideoFile(frontVideoFile);
+            return;
+        }
+
+        /// front camera file not found
+        qInfo() << "front camera file not found";
+    }
 }
 
-QString VideoPath::findBackInFile()
+QString VideoPath::findBackInFile() const
 {
     QString given = m_frontVideoFile;
     if(given[given.size()-5] != 'F')
@@ -62,7 +94,7 @@ QString VideoPath::findBackInFile()
     return given;
 }
 
-QString VideoPath::findBackOutFile()
+QString VideoPath::findBackOutFile() const
 {
     QString given = m_frontVideoFile;
     if(given[given.size()-5] != 'F')
@@ -93,7 +125,7 @@ QString VideoPath::findBackOutFile()
     return backVideoFile;
 }
 
-QString VideoPath::findFrontInFile()
+QString VideoPath::findFrontInFile() const
 {
     QString given = m_backVideoFile;
     if(given[given.size()-5] != 'B')
@@ -110,7 +142,7 @@ QString VideoPath::findFrontInFile()
     return given;
 }
 
-QString VideoPath::findFrontOutFile()
+QString VideoPath::findFrontOutFile() const
 {
     QString given = m_backVideoFile;
     if(given[given.size()-5] != 'B')
@@ -139,4 +171,22 @@ QString VideoPath::findFrontOutFile()
         return "";
     }
     return frontVideoFile;
+}
+
+void VideoPath::setFrontVideoFile(QString frontVideoFile)
+{
+    if(frontVideoFile == m_frontVideoFile)
+        return;
+
+    m_frontVideoFile = frontVideoFile;
+    emit this->frontVideoFileChanged();
+}
+
+void VideoPath::setBackVideoFile(QString backVideoFile)
+{
+    if(backVideoFile == m_backVideoFile)
+        return;
+
+    m_backVideoFile = backVideoFile;
+    emit this->backVideoFileChanged();
 }

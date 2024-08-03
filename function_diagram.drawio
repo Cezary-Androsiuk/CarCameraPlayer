@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-08-03T18:56:02.805Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.5.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="cYpUv2-ay5nB1gz8pMaP" version="24.5.1" type="device">
+<mxfile host="Electron" modified="2024-08-03T23:47:06.073Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.5.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="-sGCIn-GZTamX9d7iHgv" version="24.5.1" type="device">
   <diagram name="Page-1" id="O__X3Oyo5XvWB0C7ne0w">
-    <mxGraphModel dx="3007" dy="2320" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2790" dy="1793" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -89,32 +89,38 @@
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-24" target="GhN1twf3DZPRlEhN9xuZ-21">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GhN1twf3DZPRlEhN9xuZ-27" value="addVideoFile(QString videoFile)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1343" y="-239.92" width="193" height="60" as="geometry" />
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-27" target="GhN1twf3DZPRlEhN9xuZ-69">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GhN1twf3DZPRlEhN9xuZ-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-28" target="GhN1twf3DZPRlEhN9xuZ-27">
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-27" target="GhN1twf3DZPRlEhN9xuZ-68">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-27" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;buildAlternativeFilePath(QString videoFile)&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1741" y="-97" width="275" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-28" target="GhN1twf3DZPRlEhN9xuZ-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-28" value="QString findBackOutFile()" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1601" y="-299.92" width="229" height="60" as="geometry" />
+          <mxGeometry x="2116" y="-157" width="229" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="GhN1twf3DZPRlEhN9xuZ-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-29" target="GhN1twf3DZPRlEhN9xuZ-27">
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-29" target="GhN1twf3DZPRlEhN9xuZ-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-29" value="QString findFrontInFile()" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1601" y="-179.92" width="229" height="60" as="geometry" />
+          <mxGeometry x="2116" y="-37" width="229" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="GhN1twf3DZPRlEhN9xuZ-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-30" target="GhN1twf3DZPRlEhN9xuZ-27">
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-30" target="GhN1twf3DZPRlEhN9xuZ-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-30" value="QString findBackInFile()" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1601" y="-419.92" width="229" height="60" as="geometry" />
+          <mxGeometry x="2116" y="-277" width="229" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="GhN1twf3DZPRlEhN9xuZ-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-31" target="GhN1twf3DZPRlEhN9xuZ-27">
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-31" target="GhN1twf3DZPRlEhN9xuZ-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-31" value="QString findFrontOutFile()" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1601" y="-59.92" width="229" height="60" as="geometry" />
+          <mxGeometry x="2116" y="83" width="229" height="60" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-44" value="" style="edgeStyle=segmentEdgeStyle;endArrow=none;html=1;curved=0;rounded=0;endSize=8;startSize=8;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;endFill=0;" edge="1" parent="1">
           <mxGeometry width="100" relative="1" as="geometry">
@@ -132,21 +138,23 @@
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-46" value="" style="edgeStyle=segmentEdgeStyle;endArrow=none;html=1;curved=0;rounded=0;endSize=8;startSize=8;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;endFill=0;" edge="1" parent="1">
           <mxGeometry width="100" relative="1" as="geometry">
-            <mxPoint x="1282" y="150.00000000000003" as="sourcePoint" />
-            <mxPoint x="1282" y="150.00000000000003" as="targetPoint" />
+            <mxPoint x="1226" y="254.00000000000003" as="sourcePoint" />
+            <mxPoint x="1226" y="254.00000000000003" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="2120" y="150.00000000000003" />
-              <mxPoint x="2120" y="-476" />
-              <mxPoint x="1282" y="-476" />
-              <mxPoint x="1282" y="-47" />
+              <mxPoint x="2414" y="254" />
+              <mxPoint x="2414" y="-372" />
+              <mxPoint x="1226" y="-372" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-47" value="VideoPath" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1283" y="-474.92" width="73" height="26" as="geometry" />
+          <mxGeometry x="1227" y="-370.92" width="73" height="26" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-48" value="int getInitCurentPlayedVideoIndex() const;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="692.5" y="-346" width="251" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-49" target="GhN1twf3DZPRlEhN9xuZ-65">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-49" value="void setCurrentPlayedVideoIndex(int index);" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="456" y="-78" width="262" height="60" as="geometry" />
@@ -188,6 +196,82 @@
         </mxCell>
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-57" value="QML" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-3" y="559" width="44" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-63" target="GhN1twf3DZPRlEhN9xuZ-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-63" value="addVideoFile(QString videoFile)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1457" y="-97" width="187" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-65" target="GhN1twf3DZPRlEhN9xuZ-63">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1159" y="-48" />
+              <mxPoint x="1159" y="-67" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-65" value="currentPlayedVideoIndexChanged()" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="776" y="-88" width="267" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-68" target="GhN1twf3DZPRlEhN9xuZ-70">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-68" value="setFrontVideoFile(QString frontVideoFile)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1668" y="-217" width="241" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-69" target="GhN1twf3DZPRlEhN9xuZ-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-69" value="setBackVideoFile(QString backVideoFile)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="23" width="249" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-70">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1391" y="-178" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1536" y="-301" />
+              <mxPoint x="1536" y="-178" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-70" value="frontVideoFileChanged()" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1651" y="-341" width="184" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-71">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1394" y="362" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1743" y="362" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-71" value="backVideoFileChanged()" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1648" y="140" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-92" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-82">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="873" y="744" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1391" y="744" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-82" value="QString getBackVideoFile()&amp;nbsp;const" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="150" width="221" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-83">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="873" y="709" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1390" y="-19" />
+              <mxPoint x="1135" y="-19" />
+              <mxPoint x="1135" y="709" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-83" value="QString getBackVideoFile()&amp;nbsp;const" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1284" y="-331" width="213" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

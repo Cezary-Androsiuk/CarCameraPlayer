@@ -51,41 +51,10 @@ ApplicationWindow {
         }
     }
 
-    Item{
+    ValidRoot{
         id: validRoot
-        anchors.fill: parent
         visible: false
-        Item{
-            id: lbContainer
-            anchors{
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
-            }
-            width: parent.width * 0.1
-            BetterButtonText{
-                text: "<"
-                onClicked:{
-                    Backend.goToPrevVideo()
-                }
-            }
-        }
-        Item{
-            id: rbContainer
-            anchors{
-                top: parent.top
-                bottom: parent.bottom
-                right: parent.right
-            }
-            width: parent.width * 0.1
 
-            BetterButtonText{
-                text: ">"
-                onClicked:{
-                    Backend.goToNextVideo()
-                }
-            }
-        }
     }
 
     InvalidRoot{
