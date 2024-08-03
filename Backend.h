@@ -18,17 +18,22 @@ signals:
     void selectedFileChanged();
     void validSelectedFile();
     void invalidSelectedFile();
+    void currentPlayedVideoIndexChanged();
 
 public slots:
     void setSelectedFile(QUrl selectedFile); // used by qml
     void setSelectedFile(QString selectedFile);
     void validateSelectedFile();
 
+    void goToNextVideo(); // used by qml
+    void goToPrevVideo(); // used by qml
+
     void makePlaylist();
-    // void makeRelatedFile();
 
 private:
     bool isValidFileName(QString fileName, QChar &type) const;
+    void setCurrentPlayedVideoIndex(int index);
+    int initCurentPlayedVideoIndex() const;
 
     QString m_selectedFile;
     QChar m_selectedFileType;

@@ -56,6 +56,30 @@ void Backend::validateSelectedFile()
     emit this->validSelectedFile();
 }
 
+void Backend::goToNextVideo()
+{
+    int cpvi = m_currentPlayedVideoIndex;
+    qDebug() << "old cpvi:" << cpvi;
+    if(cpvi >= m_playlist.size()-1)
+        cpvi = 0;
+    else
+        ++ cpvi;
+    qDebug() << "new cpvi:" << cpvi;
+    this->setCurrentPlayedVideoIndex(cpvi);
+}
+
+void Backend::goToPrevVideo()
+{
+    int cpvi = m_currentPlayedVideoIndex;
+    qDebug() << "old cpvi:" << cpvi;
+    if(cpvi <= 0)
+        cpvi = m_playlist.size()-1;
+    else
+        -- cpvi;
+    qDebug() << "new cpvi:" << cpvi;
+    this->setCurrentPlayedVideoIndex(cpvi);
+}
+
 void Backend::makePlaylist()
 {
     QDirIterator dirIt(m_parentDirectory, QDir::NoDotAndDotDot | QDir::Files);
@@ -84,23 +108,9 @@ void Backend::makePlaylist()
     m_playlist = playlist;
 
 
-    /// set current Index
-    m_currentPlayedVideoIndex = -1;
-    for(const auto &file : m_playlist)
-    {
-        ++ m_currentPlayedVideoIndex;
-
-        if(file == m_selectedFile)
-        {
-            break;
-        }
-    }
-    qDebug() << "index" << m_currentPlayedVideoIndex;
-    if(m_currentPlayedVideoIndex == -1)
-    {
-        qWarning() << "file" << m_selectedFile << "was not found in playlist" << m_playlist;
-    }
-
+    /// set current played video index
+    int cpvi = this->initCurentPlayedVideoIndex();
+    this->setCurrentPlayedVideoIndex(cpvi);
 }
 
 bool Backend::isValidFileName(QString fileName, QChar &type) const
@@ -133,4 +143,38 @@ bool Backend::isValidFileName(QString fileName, QChar &type) const
 
     type = localType;
     return true;
+}
+
+void Backend::setCurrentPlayedVideoIndex(int index)
+{
+    if(m_currentPlayedVideoIndex == index)
+        return;
+
+    m_currentPlayedVideoIndex = index;
+    emit this->currentPlayedVideoIndexChanged();
+}
+
+int Backend::initCurentPlayedVideoIndex() const
+{
+    int cpvi = -1; /// m_currentPlayedVideoIndex
+    for(const auto &file : m_playlist)
+    {
+        ++ cpvi;
+
+        if(file == m_selectedFile)
+        {
+            break;
+        }
+    }
+    // qDebug() << "index" << cpvi;
+    if(cpvi == -1)
+    {
+        qWarning() << "file" << m_selectedFile << "was not found in playlist" << m_playlist;
+
+        exit(1);
+        /// user selects a file, and then a playlist is created (all files in the path where the selected file is located),
+        /// and then the file cannot be found in the playlist (I don't know how to handle this)
+    }
+
+    return cpvi;
 }

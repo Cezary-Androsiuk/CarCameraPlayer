@@ -70,7 +70,7 @@ ApplicationWindow {
             BetterButtonText{
                 text: "<"
                 onClicked:{
-                    console.log("Left")
+                    Backend.goToPrevVideo()
                 }
             }
         }
@@ -86,7 +86,7 @@ ApplicationWindow {
             BetterButtonText{
                 text: ">"
                 onClicked:{
-                    console.log("Right")
+                    Backend.goToNextVideo()
                 }
             }
         }
