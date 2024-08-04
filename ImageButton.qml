@@ -20,20 +20,20 @@ Item{
     opacity: enabled ? 1.0 : 0.2
 
     // text colors
-    property color dltTextIdleColor: root.accentColor
-    property color dltTextHoverColor: root.rgb(180, 180, 180)
-    property color dltTextPressColor: root.rgb(120, 120, 120)
+    property color dltTextIdleColor: Qt.rgba(230/255, 230/255, 230/255)
+    property color dltTextHoverColor: Qt.rgba(180/255, 180/255, 180/255)
+    property color dltTextPressColor: Qt.rgba(120/255, 120/255, 120/255)
 
     readonly property color fixedTextIdleColor: dltTextIdleColor
     readonly property color fixedTextHoverColor: dltBackgroundVisible ? dltTextIdleColor : dltTextHoverColor
     readonly property color fixedTextPressColor: dltTextPressColor
 
     // background colors
-    property color dltBacgroundIdleColor: root.backgroundColor
-    property color dltBackgroundHoverColor: root.rgb(48,47,51)
+    property color dltBacgroundIdleColor: Qt.rgba(28/255, 27/255, 31/255)
+    property color dltBackgroundHoverColor: Qt.rgba(48/255, 47/255, 51/255)
 
-    property color dltBacgroundIdleColorPopup: root.rgb(66, 66, 66)
-    property color dltBackgroundHoverColorPopup: root.rgb(96, 96, 96)
+    property color dltBacgroundIdleColorPopup: Qt.rgba(66/255, 66/255, 66/255)
+    property color dltBackgroundHoverColorPopup: Qt.rgba(96/255, 96/255, 96/255)
 
     readonly property color fixedBackgroundIdleColor: dltUsePopupColor ? dltBacgroundIdleColorPopup : dltBacgroundIdleColor
     readonly property color fixedBackgroundHoverColor: dltUsePopupColor ? dltBackgroundHoverColorPopup : dltBackgroundHoverColor

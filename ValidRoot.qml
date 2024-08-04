@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Controls.Imagine
 
+import QtMultimedia
+
 Item {
     id: validRoot
     anchors.fill: parent
@@ -14,10 +16,19 @@ Item {
     readonly property string alternativeVideoPath: frontIsMainCamera ? VideoPath.backVideoFile : VideoPath.frontVideoFile
 
     property bool playing: false
+    onPlayingChanged: {
+        if(playing){
+            mainVideo.play();
+            alternativeVideo.play();
+        }
+        else{
+            mainVideo.pause();
+            alternativeVideo.pause();
+        }
 
-    // Backend.goToPrevVideo()
+    }
 
-    // Backend.goToNextVideo()
+    property bool stoppedBySlider: false
 
     Item{
         id: footer
@@ -28,10 +39,13 @@ Item {
         }
         height: {
             var h = parent.height * 0.1;
-            if(h < 60) 60;
-            else h;
+            h < 75 ? 75 : h
         }
-        onHeightChanged: console.log(height)
+
+        Rectangle{
+            anchors.fill: parent
+            color: Qt.rgba(28/255, 27/255, 31/255)
+        }
 
         Item{
             id: buttonsContainer
@@ -43,85 +57,9 @@ Item {
                 right: parent.right
                 bottom: sliderContainer.top
             }
-            Rectangle{anchors.fill: parent; color: "blue"}
 
-            Button{
-                id: switchCamerasButton
-                anchors{
-                    verticalCenter: parent.verticalCenter
-                    right: rowLayout.left
-                    rightMargin: 20
-                }
-                height: buttonsContainer.height * 0.9
-                width: height
+            ControlsPanel{
 
-                icon.source: Qt.resolvedUrl("assets/icons/switch.svg")
-
-                onClicked: validRoot.frontIsMainCamera = !validRoot.frontIsMainCamera;
-
-                display: AbstractButton.IconOnly
-            }
-
-            Row{
-                id: rowLayout
-                anchors.centerIn: parent
-                spacing: 2
-                Button {
-                    height: buttonsContainer.height * 0.9
-                    width: height
-                    Component.onCompleted: console.log("h:" + height + " w:" + width)
-                }
-
-                Button {
-                    id: playButton
-                    height: buttonsContainer.height * 0.9
-                    width: height
-
-                    icon.source: {
-                        if(validRoot.playing)
-                            Qt.resolvedUrl("assets/icons/pause.svg")
-                        else
-                            Qt.resolvedUrl("assets/icons/play.svg")
-                    }
-                    icon.height: height *2
-                    icon.width: width *2
-
-                    onClicked: validRoot.playing = !validRoot.playing
-
-                    display: AbstractButton.IconOnly
-                }
-
-                Button {
-                    height: buttonsContainer.height * 0.9
-                    width: height
-                }
-            }
-
-            Button{
-                id: viewTypeButton
-                anchors{
-                    verticalCenter: parent.verticalCenter
-                    left: rowLayout.right
-                    leftMargin: 20
-                }
-                height: buttonsContainer.height * 0.9
-                width: height
-
-                icon.source: {
-                    if(false);
-                    else if(validRoot.viewType === 0) Qt.resolvedUrl("assets/icons/1.svg");
-                    else if(validRoot.viewType === 1) Qt.resolvedUrl("assets/icons/2.svg");
-                    // else if(validRoot.viewType === 2) Qt.resolvedUrl("assets/icons/3.svg");
-                    // else if(validRoot.viewType === 3) Qt.resolvedUrl("assets/icons/4.svg");
-                }
-
-                onClicked:{
-                    if(false);
-                    else if(validRoot.viewType === 0) validRoot.viewType = 1;
-                    else if(validRoot.viewType === 1) validRoot.viewType = 0;
-                }
-
-                display: AbstractButton.IconOnly
             }
         }
 
@@ -133,13 +71,38 @@ Item {
                 right: parent.right
                 rightMargin: 20
                 bottom: parent.bottom
+                bottomMargin: 5
             }
             height: parent.height * 0.4
-            Rectangle{anchors.fill: parent; color: "red"}
 
             Slider{
                 id: slider
                 anchors.fill: parent
+
+                from: 0
+                to: 1//backend.player.duration
+                onPressedChanged: {
+                    if(!playing)
+                        return;
+
+                    // mute only audio instead
+                    // if(pressed)
+                    // {
+                    //     pagePlayer.stoppedBySlider = true;
+                    //     backend.player.play();
+                    // }
+                    // else
+                    // {
+                    //     if(pagePlayer.stoppedBySlider)
+                    //     {
+                    //         pagePlayer.stoppedBySlider = false;
+                    //         backend.player.play();
+                    //     }
+                    // }
+                }
+                onMoved: {
+                    // backend.player.position = value
+                }
 
             }
         }
@@ -181,12 +144,13 @@ Item {
         }
 
 
-
-        Rectangle{
+        /// smooth controls
+        MouseArea {
             anchors.fill: parent
-            color: "orange"
+            onClicked: {
+                validRoot.playing = !validRoot.playing
+            }
         }
-
 
         Item{
             id: mainVideoContainer
@@ -197,12 +161,18 @@ Item {
             }
             clip: true
 
+            Video{
+                id: mainVideo
+                anchors.fill: parent
+                source: mainVideoPath
+
+            }
+
             Text{
                 anchors.fill: parent
                 text: mainVideoPath
                 wrapMode: Text.Wrap
             }
-
         }
 
         Item{
@@ -211,15 +181,23 @@ Item {
                 if(false);
                 else if(viewType === 0) alternativeVideoArea1;
                 else if(viewType === 1) alternativeVideoArea2;
+                // else if(viewType === 2) alternativeVideoArea3;
+                // else if(viewType === 3) alternativeVideoArea4;
             }
             clip: true
+
+            Video{
+                id: alternativeVideo
+                anchors.fill: parent
+                source: alternativeVideoPath
+                muted: true
+            }
 
             Text{
                 anchors.fill: parent
                 text: alternativeVideoPath
                 wrapMode: Text.Wrap
             }
-
         }
     }
 
