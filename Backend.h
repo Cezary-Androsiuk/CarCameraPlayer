@@ -19,6 +19,7 @@ signals:
     void validSelectedFile();
     void invalidSelectedFile();
     void currentPlayedVideoIndexChanged();
+    void currentlyPlayedVideoChanged(QString videoPath);
 
 public slots:
     void setSelectedFile(QUrl selectedFile); // used by qml
@@ -29,6 +30,7 @@ public slots:
     void goToPrevVideo(); // used by qml
 
     void makePlaylist();
+    void changeCurrentlyPlayedVideo();
 
 private:
     bool isValidFileName(QString fileName, QChar &type) const;

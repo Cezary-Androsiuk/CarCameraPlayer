@@ -6,13 +6,11 @@ VideoPath::VideoPath(QObject *parent)
 
 QString VideoPath::getFrontVideoFile() const
 {
-    qDebug() << "get front" << m_frontVideoFile;
     return m_frontVideoFile;
 }
 
 QString VideoPath::getBackVideoFile() const
 {
-    qDebug() << "get back" << m_backVideoFile;
     return m_backVideoFile;
 }
 

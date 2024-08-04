@@ -147,15 +147,16 @@ Item {
                     mainVideoArea1
             }
 
+            Rectangle{
+                anchors.fill: parent
+                color: frontIsMainCamera ? "blue" : "green"
+            }
+
             Text{
                 anchors.centerIn: parent
                 text: mainVideoPath
             }
 
-            Rectangle{
-                anchors.fill: parent
-                color: frontIsMainCamera ? "blue" : "green"
-            }
         }
 
         Item{
@@ -167,15 +168,16 @@ Item {
                     alternativeVideoArea2;
             }
 
+            Rectangle{
+                anchors.fill: parent
+                color: frontIsMainCamera ? "green" : "blue"
+            }
+
             Text{
                 anchors.centerIn: parent
                 text: alternativeVideoPath
             }
 
-            Rectangle{
-                anchors.fill: parent
-                color: frontIsMainCamera ? "green" : "blue"
-            }
         }
     }
 

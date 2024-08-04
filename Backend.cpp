@@ -6,9 +6,8 @@ Backend::Backend(QObject *parent)
     m_currentPlayedVideoIndex(-1)
 {
     QObject::connect(this, &Backend::selectedFileChanged, this, &Backend::validateSelectedFile);
-    // QObject::connect(this, &Backend::invalidSelectedFile, this, );
     QObject::connect(this, &Backend::validSelectedFile, this, &Backend::makePlaylist);
-    // QObject::connect(this, &Backend::validSelectedFile, this, &Backend::makeRelatedFile);
+    QObject::connect(this, &Backend::currentPlayedVideoIndexChanged, this, &Backend::changeCurrentlyPlayedVideo);
 
 }
 
@@ -111,6 +110,12 @@ void Backend::makePlaylist()
     /// set current played video index
     int cpvi = this->getInitCurentPlayedVideoIndex();
     this->setCurrentPlayedVideoIndex(cpvi);
+}
+
+void Backend::changeCurrentlyPlayedVideo()
+{
+    QString videoPath = m_playlist.at(m_currentPlayedVideoIndex);
+    emit this->currentlyPlayedVideoChanged(videoPath);
 }
 
 bool Backend::isValidFileName(QString fileName, QChar &type) const

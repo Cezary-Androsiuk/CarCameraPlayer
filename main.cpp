@@ -18,8 +18,7 @@ int main(int argc, char *argv[])
 
     Backend* backend = new Backend(&engine);
     VideoPath *videoPath = new VideoPath(&engine);
-    // after index changed emit signal that sends QString outside backend
-    // QObject::connect(backend, &Backend::)
+    QObject::connect(backend, &Backend::currentlyPlayedVideoChanged, videoPath, &VideoPath::setVideoFile);
 
     engine.rootContext()->setContextProperty("Backend", backend);
     engine.rootContext()->setContextProperty("VideoPath", videoPath);
