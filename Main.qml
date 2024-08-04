@@ -9,6 +9,9 @@ ApplicationWindow {
     visible: false
     // title: qsTr("Hello World")
 
+    minimumWidth: 400
+    minimumHeight: 300
+
     function rgb(r, g, b, a = 255)
     {
         return Qt.rgba(r/255, g/255, b/255, a/255);
