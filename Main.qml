@@ -7,7 +7,7 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: false
-    title: qsTr("Hello World")
+    // title: qsTr("Hello World")
 
     function rgb(r, g, b, a = 255)
     {

@@ -2,7 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include <Backend.h>
+#include "Backend.h"
+#include "VideoPath.h"
 
 /// works for records gained from 70mai Dash Cam Pro Plus A500S
 /// 1. po zaznaczeniu pliku .mp4 możliwe są dwa scenariusze, 1{ nagrania uzupełniające (gdy wybierzesz F to uzupełnieniem jest B i na odwrót)
@@ -14,8 +15,14 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
     Backend* backend = new Backend(&engine);
+    VideoPath *videoPath = new VideoPath(&engine);
+    // after index changed emit signal that sends QString outside backend
+    // QObject::connect(backend, &Backend::)
+
     engine.rootContext()->setContextProperty("Backend", backend);
+    engine.rootContext()->setContextProperty("VideoPath", videoPath);
 
     const QUrl url(QStringLiteral("qrc:/CarCameraPlayer/Main.qml"));
     QObject::connect(

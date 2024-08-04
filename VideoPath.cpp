@@ -6,11 +6,13 @@ VideoPath::VideoPath(QObject *parent)
 
 QString VideoPath::getFrontVideoFile() const
 {
+    qDebug() << "get front" << m_frontVideoFile;
     return m_frontVideoFile;
 }
 
 QString VideoPath::getBackVideoFile() const
 {
+    qDebug() << "get back" << m_backVideoFile;
     return m_backVideoFile;
 }
 
@@ -75,6 +77,8 @@ void VideoPath::buildAlternativeFilePath(QString videoFile)
         /// front camera file not found
         qInfo() << "front camera file not found";
     }
+    qDebug() << videoFile;
+    qDebug() << m_frontVideoFile << m_backVideoFile;
 }
 
 QString VideoPath::findBackInFile() const

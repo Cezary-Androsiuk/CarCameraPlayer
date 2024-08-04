@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-08-03T23:47:06.073Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.5.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="-sGCIn-GZTamX9d7iHgv" version="24.5.1" type="device">
+<mxfile host="Electron" modified="2024-08-04T00:27:32.812Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.5.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="S5fCK1ZDsljA7P1obfTt" version="24.5.1" type="device">
   <diagram name="Page-1" id="O__X3Oyo5XvWB0C7ne0w">
-    <mxGraphModel dx="2790" dy="1793" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1766" dy="1196" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -203,7 +203,7 @@
         <mxCell id="GhN1twf3DZPRlEhN9xuZ-63" value="addVideoFile(QString videoFile)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1457" y="-97" width="187" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="GhN1twf3DZPRlEhN9xuZ-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-65" target="GhN1twf3DZPRlEhN9xuZ-63">
+        <mxCell id="GhN1twf3DZPRlEhN9xuZ-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#a0522d;strokeColor=#6D1F00;" edge="1" parent="1" source="GhN1twf3DZPRlEhN9xuZ-65" target="GhN1twf3DZPRlEhN9xuZ-63">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1159" y="-48" />
