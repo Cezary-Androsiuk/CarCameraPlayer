@@ -32,10 +32,13 @@ qt_add_qml_module(appCarCameraPlayer
         RESOURCES assets/icons/volume_2.svg
         RESOURCES assets/icons/volume_3.svg
         RESOURCES assets/icons/switch.svg
+        RESOURCES assets/icons/0.svg
         RESOURCES assets/icons/1.svg
         RESOURCES assets/icons/2.svg
         RESOURCES assets/icons/3.svg
         RESOURCES assets/icons/4.svg
+        RESOURCES assets/icons/invisible.svg
+        RESOURCES assets/icons/visible.svg
         QML_FILES ControlsPanel.qml
 )
 

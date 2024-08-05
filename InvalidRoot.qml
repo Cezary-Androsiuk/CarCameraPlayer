@@ -11,6 +11,11 @@ Item {
     readonly property bool showFields: false
     required property var filePath
 
+    Rectangle{
+        anchors.fill: parent
+        color: Qt.rgba(28/255, 27/255, 31/255)
+    }
+
     Item{
         id: center
         anchors.centerIn: parent
@@ -44,6 +49,7 @@ Item {
             height: parent.height * 2/3
             text: "file " + invalidRoot.filePath + " is not valid, are you want to retry?"
             wrapMode: Text.WordWrap
+            color: Qt.rgba(230/255, 230/255, 230/255)
         }
     }
 

@@ -9,26 +9,27 @@ Item {
     anchors.fill: parent
 
     property bool frontIsMainCamera: true
-    property int viewType: 0
-
-    /// decide what video is main, and what is alternative one
-    readonly property string mainVideoPath: frontIsMainCamera ? VideoPath.frontVideoFile : VideoPath.backVideoFile
-    readonly property string alternativeVideoPath: frontIsMainCamera ? VideoPath.backVideoFile : VideoPath.frontVideoFile
-
+    property int viewType: 1
     property bool playing: false
+    property real volume: 1.0
     onPlayingChanged: {
         if(playing){
-            mainVideo.play();
-            alternativeVideo.play();
+            frontVideo.play();
+            backVideo.play();
         }
         else{
-            mainVideo.pause();
-            alternativeVideo.pause();
+            frontVideo.pause();
+            backVideo.pause();
         }
+    }
+    property bool mutedBySlider: false
+    property bool alternativeVisible: true
 
+    Rectangle{
+        anchors.fill: parent
+        color: Qt.rgba(28/255, 27/255, 31/255)
     }
 
-    property bool stoppedBySlider: false
 
     Item{
         id: footer
@@ -41,6 +42,7 @@ Item {
             var h = parent.height * 0.1;
             h < 75 ? 75 : h
         }
+
 
         Rectangle{
             anchors.fill: parent
@@ -80,31 +82,45 @@ Item {
                 anchors.fill: parent
 
                 from: 0
-                to: 1//backend.player.duration
+                to: frontVideo.duration
+                value: frontVideo.position
                 onPressedChanged: {
                     if(!playing)
                         return;
 
-                    // mute only audio instead
-                    // if(pressed)
-                    // {
-                    //     pagePlayer.stoppedBySlider = true;
-                    //     backend.player.play();
-                    // }
-                    // else
-                    // {
-                    //     if(pagePlayer.stoppedBySlider)
-                    //     {
-                    //         pagePlayer.stoppedBySlider = false;
-                    //         backend.player.play();
-                    //     }
-                    // }
+                    // mute only audio while seek
+                    if(pressed)
+                    {
+                        validRoot.mutedBySlider = true;
+                        frontVideo.muted = true
+                    }
+                    else
+                    {
+                        if(validRoot.mutedBySlider)
+                        {
+                            validRoot.mutedBySlider = false;
+                            frontVideo.muted = false
+                        }
+                    }
                 }
                 onMoved: {
-                    // backend.player.position = value
+                    frontVideo.position = value
+                    backVideo.position = value
                 }
 
             }
+        }
+
+        Rectangle{
+            anchors{
+                top: parent.top
+                left: parent.left
+                // leftMargin: 20
+                right: parent.right
+                // rightMargin: 20
+            }
+            height: 1
+            color: Qt.rgba(230/255, 230/255, 230/255)
         }
     }
 
@@ -115,7 +131,33 @@ Item {
             left: parent.left
             right: parent.right
             bottom: footer.top
+            bottomMargin: 2
         }
+
+        Rectangle{
+            anchors.fill: parent
+            color: Qt.rgba(28/255, 27/255, 31/255)
+        }
+
+        /// decide what area should be used by main, and what by alternative
+        readonly property var mainVideoAreaByType: {
+            if(false);
+            else if(viewType === 0) mainVideoArea1;
+            else if(viewType === 1) mainVideoArea1;
+            else if(viewType === 2) mainVideoArea1;
+            else if(viewType === 3) mainVideoArea1;
+        }
+        readonly property var alternativeVideoAreaByType: {
+            if(false);
+            else if(viewType === 0) alternativeVideoArea0;
+            else if(viewType === 1) alternativeVideoArea1;
+            else if(viewType === 2) alternativeVideoArea2;
+            else if(viewType === 3) alternativeVideoArea3;
+        }
+
+        /// decide what area is for front, and what is back one
+        readonly property var frontVideoFill: frontIsMainCamera ? mainVideoAreaByType : alternativeVideoAreaByType
+        readonly property var backVideoFill: frontIsMainCamera ? alternativeVideoAreaByType : mainVideoAreaByType
 
         /// main areas to atach videos
         Item{
@@ -125,22 +167,40 @@ Item {
 
         /// alternative areas to atach videos
         Item{
-            id: alternativeVideoArea1
-            anchors{
-                right: parent.right
-                bottom: parent.bottom
-            }
-            width: parent.width * 0.2
-            height: parent.height * 0.2
-        }
-        Item{
-            id: alternativeVideoArea2
+            id: alternativeVideoArea0
             anchors{
                 left: parent.left
                 top: parent.top
             }
-            width: parent.width * 0.2
-            height: parent.height * 0.2
+            width: parent.width * 0.4
+            height: parent.height * 0.4
+        }
+        Item{
+            id: alternativeVideoArea1
+            anchors{
+                right: parent.right
+                top: parent.top
+            }
+            width: parent.width * 0.4
+            height: parent.height * 0.4
+        }
+        Item{
+            id: alternativeVideoArea2
+            anchors{
+                right: parent.right
+                bottom: parent.bottom
+            }
+            width: parent.width * 0.4
+            height: parent.height * 0.4
+        }
+        Item{
+            id: alternativeVideoArea3
+            anchors{
+                left: parent.left
+                bottom: parent.bottom
+            }
+            width: parent.width * 0.4
+            height: parent.height * 0.4
         }
 
 
@@ -153,50 +213,44 @@ Item {
         }
 
         Item{
-            id: mainVideoContainer
-            anchors.fill: {
-                if(false);
-                else if(viewType === 0) mainVideoArea1
-                else if(viewType === 1) mainVideoArea1
-            }
+            id: frontVideoContainer
+            anchors.fill: parent.frontVideoFill
             clip: true
+            z: frontIsMainCamera ? 0 : 1 // if is alternative set on top
+            visible: frontIsMainCamera ? true : alternativeVisible
+
+            // Rectangle{anchors.fill: parent; color: "blue"}
 
             Video{
-                id: mainVideo
+                id: frontVideo
                 anchors.fill: parent
-                source: mainVideoPath
-
-            }
-
-            Text{
-                anchors.fill: parent
-                text: mainVideoPath
-                wrapMode: Text.Wrap
+                source: VideoPath.frontVideoFile
+                onSourceChanged: { // buffer
+                    play();
+                    pause()
+                }
+                volume: validRoot.volume
             }
         }
 
         Item{
-            id: alternativeVideoContainer
-            anchors.fill: {
-                if(false);
-                else if(viewType === 0) alternativeVideoArea1;
-                else if(viewType === 1) alternativeVideoArea2;
-                // else if(viewType === 2) alternativeVideoArea3;
-                // else if(viewType === 3) alternativeVideoArea4;
-            }
+            id: backVideoContainer
+            anchors.fill: parent.backVideoFill
             clip: true
+            z: frontIsMainCamera ? 1 : 0 // if is alternative set on top
+            visible: frontIsMainCamera ? alternativeVisible : true
+
+            // Rectangle{anchors.fill: parent; color: "red"}
 
             Video{
-                id: alternativeVideo
+                id: backVideo
                 anchors.fill: parent
-                source: alternativeVideoPath
+                source: VideoPath.backVideoFile
                 muted: true
-            }
-
-            Text{
-                anchors.fill: parent
-                text: alternativeVideoPath
-                wrapMode: Text.Wrap
+                onSourceChanged: { // buffer
+                    play();
+                    pause()
+                }
             }
         }
     }
