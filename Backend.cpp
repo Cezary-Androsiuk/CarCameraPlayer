@@ -128,7 +128,7 @@ bool Backend::isValidFileName(QString fileName, QChar &type) const
         return false;
     }
     QString firstTwo = fileName.left(2);
-    if(firstTwo != "EV")
+    if(firstTwo != "EV" && firstTwo != "NO")
     {
         qDebug() << fileName << "has invalid begin";
         return false;
