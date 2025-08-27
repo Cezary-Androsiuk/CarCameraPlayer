@@ -27,14 +27,17 @@ ApplicationWindow {
         target: Backend
         function onInvalidSelectedFile()
         {
-            validRoot.visible = false;
-            invalidRoot.visible = true;
+            mainLoader.setSource(
+                        "InvalidRoot.qml",
+                        {
+                            "filePath": fileDialog.selectedFile,
+                            // "reason": "",
+                        })
         }
 
         function onValidSelectedFile()
         {
-            invalidRoot.visible = false;
-            validRoot.visible = true;
+            mainLoader.setSource("ValidRoot.qml")
         }
     }
 
@@ -55,26 +58,24 @@ ApplicationWindow {
         }
     }
 
-    ValidRoot{
-        id: validRoot
-        visible: false
-
-    }
-
-    InvalidRoot{
-        id: invalidRoot
-        visible: false
-        filePath: fileDialog.selectedFile
-
-        onRetried: {
-            console.log("user choosed retry")
-            root.hide()
-            fileDialog.open();
-        }
-
-        onExited: {
-            console.log("user choosed exit")
-            Qt.quit()
+    Loader{
+        id: mainLoader
+        anchors.fill: parent
+        source: ""
+        onLoaded: {
+            // if loader contains item,  and if that item contains signals "retried" and "exited"
+            if(mainLoader.item && mainLoader.item.retried && mainLoader.item.exited){
+                // connect slots to them
+                mainLoader.item.retried.connect(function(){
+                    console.log("user choosed retry")
+                    root.hide()
+                    fileDialog.open();
+                })
+                mainLoader.item.exited.connect(function(){
+                    console.log("user choosed exit")
+                    Qt.quit()
+                })
+            }
         }
     }
 
