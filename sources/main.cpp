@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("Backend", backend);
     engine.rootContext()->setContextProperty("VideoPath", videoPath);
 
-    const QUrl url(QStringLiteral("qrc:/CarCameraPlayer/Main.qml"));
+    const QUrl url(QStringLiteral("qrc:/CarCameraPlayer/qml/Main.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
