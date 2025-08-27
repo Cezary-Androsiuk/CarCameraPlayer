@@ -1,5 +1,7 @@
 #include "Backend.h"
 
+const char *version = "v1.2.1";
+
 Backend::Backend(QObject *parent)
     : QObject{parent},
     m_selectedFile(""),

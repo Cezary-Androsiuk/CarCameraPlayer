@@ -8,6 +8,8 @@
 #include <QFileInfo>
 #include <QDirIterator>
 
+extern const char *version;
+
 class Backend : public QObject
 {
     Q_OBJECT

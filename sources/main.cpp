@@ -20,10 +20,7 @@ int main(int argc, char *argv[])
     VideoPath *videoPath = new VideoPath(&engine);
     QObject::connect(backend, &Backend::currentlyPlayedVideoChanged, videoPath, &VideoPath::setVideoFile);
 
-    engine.rootContext()->
-        setContextProperty(
-            "applicationPath",
-            QGuiApplication::applicationDirPath() + "/CarCameraPlayer/" );
+    engine.rootContext()->setContextProperty("version", version);
     engine.rootContext()->setContextProperty("Backend", backend);
     engine.rootContext()->setContextProperty("VideoPath", videoPath);
 
