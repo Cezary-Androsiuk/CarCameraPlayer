@@ -1,6 +1,6 @@
 #include "Backend.h"
 
-const char *version = "v1.2.3";
+const char *version = "v1.2.4";
 
 Backend::Backend(QObject *parent)
     : QObject{parent},

@@ -47,7 +47,8 @@ ApplicationWindow {
         fileMode: FileDialog.OpenFile
         onAccepted: {
             Backend.setSelectedFile(fileDialog.selectedFile)
-            root.visible = true;
+            // root.visible = true;
+            root.showMaximized();
 
             // move window to top
             root.raise();
@@ -63,19 +64,24 @@ ApplicationWindow {
         anchors.fill: parent
         source: ""
         onLoaded: {
-            // if loader contains item,  and if that item contains signals "retried" and "exited"
-            if(mainLoader.item && mainLoader.item.retried && mainLoader.item.exited){
-                // connect slots to them
-                mainLoader.item.retried.connect(function(){
-                    console.log("user choosed retry")
-                    root.hide()
-                    fileDialog.open();
-                })
-                mainLoader.item.exited.connect(function(){
-                    console.log("user choosed exit")
-                    Qt.quit()
-                })
+            // if loader contains item
+            if(mainLoader.item){
+                // if that item contains signals "retried" and "exited"
+                if(mainLoader.item.retried && mainLoader.item.exited){
+                    // connect slots to them
+                    mainLoader.item.retried.connect(function(){
+                        console.log("user choosed retry")
+                        root.hide()
+                        fileDialog.open();
+                    })
+                    mainLoader.item.exited.connect(function(){
+                        console.log("user choosed exit")
+                        Qt.quit()
+                    })
+                }
+                // if that item contains signals "retried" and "exited"
             }
+
         }
     }
 
