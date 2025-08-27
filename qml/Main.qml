@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
 
+
 ApplicationWindow {
     id: root
     width: 720

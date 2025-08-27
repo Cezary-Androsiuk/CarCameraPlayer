@@ -29,7 +29,7 @@ Item {
         z: 2
 
         ImageButton{
-            dltImageIdle: Qt.resolvedUrl("assets/icons/switch.svg")
+            dltImageIdle: Qt.resolvedUrl("../assets/icons/switch.svg")
             dltImageHover: dltImageIdle
             onUserClicked: {
                 validRoot.frontIsMainCamera = !validRoot.frontIsMainCamera
@@ -48,7 +48,7 @@ Item {
             width: height
 
             ImageButton{
-                dltImageIdle: Qt.resolvedUrl("assets/icons/prev.svg")
+                dltImageIdle: Qt.resolvedUrl("../assets/icons/prev.svg")
                 dltImageHover: dltImageIdle
                 onUserClicked: {
                     validRoot.playing = false
@@ -64,9 +64,9 @@ Item {
             ImageButton{
                 dltImageIdle: {
                     if(validRoot.playing)
-                        Qt.resolvedUrl("assets/icons/pause.svg")
+                        Qt.resolvedUrl("../assets/icons/pause.svg")
                     else
-                        Qt.resolvedUrl("assets/icons/play.svg")
+                        Qt.resolvedUrl("../assets/icons/play.svg")
                 }
                 dltImageHover: dltImageIdle
                 onUserClicked: {
@@ -80,7 +80,7 @@ Item {
             width: height
 
             ImageButton{
-                dltImageIdle: Qt.resolvedUrl("assets/icons/next.svg")
+                dltImageIdle: Qt.resolvedUrl("../assets/icons/next.svg")
                 dltImageHover: dltImageIdle
                 onUserClicked: {
                     validRoot.playing = false
@@ -104,10 +104,10 @@ Item {
         ImageButton{
             dltImageIdle: {
                 if(false);
-                else if(validRoot.viewType === 0) Qt.resolvedUrl("assets/icons/0.svg");
-                else if(validRoot.viewType === 1) Qt.resolvedUrl("assets/icons/1.svg");
-                else if(validRoot.viewType === 2) Qt.resolvedUrl("assets/icons/2.svg");
-                else if(validRoot.viewType === 3) Qt.resolvedUrl("assets/icons/3.svg");
+                else if(validRoot.viewType === 0) Qt.resolvedUrl("../assets/icons/0.svg");
+                else if(validRoot.viewType === 1) Qt.resolvedUrl("../assets/icons/1.svg");
+                else if(validRoot.viewType === 2) Qt.resolvedUrl("../assets/icons/2.svg");
+                else if(validRoot.viewType === 3) Qt.resolvedUrl("../assets/icons/3.svg");
             }
             dltImageHover: dltImageIdle
             onUserClicked: {
@@ -134,9 +134,9 @@ Item {
         ImageButton{
             dltImageIdle: {
                 if(validRoot.alternativeVisible)
-                    Qt.resolvedUrl("assets/icons/visible.svg");
+                    Qt.resolvedUrl("../assets/icons/visible.svg");
                 else
-                    Qt.resolvedUrl("assets/icons/invisible.svg");
+                    Qt.resolvedUrl("../assets/icons/invisible.svg");
             }
             dltImageHover: dltImageIdle
             onUserClicked: validRoot.alternativeVisible = !validRoot.alternativeVisible
@@ -162,10 +162,10 @@ Item {
             height: buttonsContainer.height * 0.5
             width: height
             source: {
-                if(validRoot.volume === 0) Qt.resolvedUrl("assets/icons/volume_0.svg");
-                else if(validRoot.volume > 0.0 && validRoot.volume <= 0.2) Qt.resolvedUrl("assets/icons/volume_1.svg");
-                else if(validRoot.volume > 0.2 && validRoot.volume <= 0.9) Qt.resolvedUrl("assets/icons/volume_2.svg");
-                else if(validRoot.volume > 0.9) Qt.resolvedUrl("assets/icons/volume_3.svg");
+                if(validRoot.volume === 0) Qt.resolvedUrl("../assets/icons/volume_0.svg");
+                else if(validRoot.volume > 0.0 && validRoot.volume <= 0.2) Qt.resolvedUrl("../assets/icons/volume_1.svg");
+                else if(validRoot.volume > 0.2 && validRoot.volume <= 0.9) Qt.resolvedUrl("../assets/icons/volume_2.svg");
+                else if(validRoot.volume > 0.9) Qt.resolvedUrl("../assets/icons/volume_3.svg");
             }
         }
 

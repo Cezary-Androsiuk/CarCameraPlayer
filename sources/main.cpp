@@ -20,17 +20,20 @@ int main(int argc, char *argv[])
     VideoPath *videoPath = new VideoPath(&engine);
     QObject::connect(backend, &Backend::currentlyPlayedVideoChanged, videoPath, &VideoPath::setVideoFile);
 
+    engine.rootContext()->
+        setContextProperty(
+            "applicationPath",
+            QGuiApplication::applicationDirPath() + "/CarCameraPlayer/" );
     engine.rootContext()->setContextProperty("Backend", backend);
     engine.rootContext()->setContextProperty("VideoPath", videoPath);
 
-    const QUrl url(QStringLiteral("qrc:/CarCameraPlayer/qml/Main.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.load(url);
+    engine.loadFromModule("CarCameraPlayer", "Main");
 
     return app.exec();
 }
