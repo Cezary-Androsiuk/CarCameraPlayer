@@ -25,13 +25,13 @@ ApplicationWindow {
 
     Connections{
         target: Backend
-        function onInvalidSelectedFile()
+        function onInvalidSelectedFile(reason)
         {
             mainLoader.setSource(
                         "InvalidRoot.qml",
                         {
                             "filePath": fileDialog.selectedFile,
-                            // "reason": "",
+                            "reason": reason,
                         })
         }
 

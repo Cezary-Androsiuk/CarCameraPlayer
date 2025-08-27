@@ -10,6 +10,7 @@ Item {
 
     readonly property bool showFields: false
     required property var filePath
+    required property string reason
 
     Rectangle{
         anchors.fill: parent
@@ -47,7 +48,9 @@ Item {
             anchors.centerIn: parent
             width: parent.width * 1/2
             height: parent.height * 2/3
-            text: "file " + invalidRoot.filePath + " is not valid, are you want to retry?"
+            text: "file " + invalidRoot.filePath + " is not valid\n" +
+                  "reason: " + reason +
+                  "\nAre you want to retry?"
             wrapMode: Text.WordWrap
             color: Qt.rgba(230/255, 230/255, 230/255)
         }

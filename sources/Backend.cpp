@@ -1,6 +1,6 @@
 #include "Backend.h"
 
-const char *version = "v1.2.2";
+const char *version = "v1.2.3";
 
 Backend::Backend(QObject *parent)
     : QObject{parent},
@@ -32,10 +32,11 @@ void Backend::validateSelectedFile()
 {
     QChar type;
     QFileInfo fileInfo(m_selectedFile);
-    if(!this->isValidFileName(fileInfo.fileName(), type))
+    QString invalidFileReason;
+    if(!this->isValidFileName(fileInfo.fileName(), type, invalidFileReason))
     {
         qDebug() << "selected file" << fileInfo.fileName() << "is not valid";
-        emit this->invalidSelectedFile();
+        emit this->invalidSelectedFile(invalidFileReason);
         return;
     }
 
@@ -48,8 +49,9 @@ void Backend::validateSelectedFile()
     qDebug() << "m_parentDirectory" << m_parentDirectory;
     if(!parentDir.exists())
     {
+        invalidFileReason = "parent directory not exist";
         qDebug() << "directory"<<m_parentDirectory<<"not exist";
-        emit this->invalidSelectedFile();
+        emit this->invalidSelectedFile(invalidFileReason);
         return;
     }
 
@@ -90,9 +92,10 @@ void Backend::makePlaylist()
         QString file = dirIt.next();
         QString fileName = QFileInfo(file).fileName();
         QChar type;
-        if(!this->isValidFileName(fileName, type))
+        QString invalidFileReason;
+        if(!this->isValidFileName(fileName, type, invalidFileReason))
         {
-            qDebug() << "in" << m_parentDirectory << "skip file:" << file;
+            qDebug() << "in" << m_parentDirectory << "skip file:" << file << "\n""reason:" << invalidFileReason;
             continue;
         }
 
@@ -120,31 +123,35 @@ void Backend::changeCurrentlyPlayedVideo()
     emit this->currentlyPlayedVideoChanged(videoPath);
 }
 
-bool Backend::isValidFileName(QString fileName, QChar &type) const
+bool Backend::isValidFileName(QString fileName, QChar &type, QString &invalidFileReason) const
 {
     type = '\0';
 
     if(fileName.size() < 7)
     {
-        qDebug() << fileName << "has to short name";
+        invalidFileReason = QString::asprintf("to short name, expected < 7, got %lld", fileName.size());
+        qDebug() << fileName << invalidFileReason;
         return false;
     }
-    QString firstTwo = fileName.left(2);
-    if(firstTwo != "EV" && firstTwo != "NO")
+    QString prefix = fileName.left(2);
+    if(prefix != "EV" && prefix != "NO")
     {
-        qDebug() << fileName << "has invalid begin";
+        invalidFileReason = "invalid prefix, expected \"EV\" or \"NO\", got \"" + prefix + "\"";
+        qDebug() << fileName << invalidFileReason;
         return false;
     }
-    QString lastFive = fileName.right(4);
-    if(lastFive.toLower() != ".mp4")
+    QString postfix = fileName.right(4);
+    if(postfix.toLower() != ".mp4")
     {
-        qDebug() << fileName << "has invalid end";
+        invalidFileReason = "invalid postfix, expected \".mp4\", got \"" + postfix + "\"";
+        qDebug() << fileName << invalidFileReason;
         return false;
     }
     QChar localType = fileName.at(fileName.size() -5);
     if(localType != 'B' && localType != 'F')
     {
-        qDebug() << fileName << "has invalid type";
+        invalidFileReason = "invalid type, expected \"B\" or \"F\", got \"" + QString(localType) + "\"";
+        qDebug() << fileName << invalidFileReason;
         return false;
     }
 

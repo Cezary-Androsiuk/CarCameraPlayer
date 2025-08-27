@@ -19,7 +19,7 @@ public:
 signals:
     void selectedFileChanged();
     void validSelectedFile();
-    void invalidSelectedFile();
+    void invalidSelectedFile(QString reason);
     void currentPlayedVideoIndexChanged();
     void currentlyPlayedVideoChanged(QString videoPath);
 
@@ -35,7 +35,7 @@ public slots:
     void changeCurrentlyPlayedVideo();
 
 private:
-    bool isValidFileName(QString fileName, QChar &type) const;
+    bool isValidFileName(QString fileName, QChar &type, QString &invalidFileReason) const;
     void setCurrentPlayedVideoIndex(int index);
     int getInitCurentPlayedVideoIndex() const;
 
