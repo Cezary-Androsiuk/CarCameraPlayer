@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 import QtQuick.Dialogs
 
 
@@ -8,8 +8,8 @@ ApplicationWindow {
     width: 720
     height: 480
     visible: false
-    // title: qsTr("Hello World")
 
+    Material.theme: Material.Dark
     minimumWidth: 400
     minimumHeight: 300
 

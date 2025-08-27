@@ -13,6 +13,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    app.setApplicationDisplayName(QString("Car Camera Player ") + version);
 
     QQmlApplicationEngine engine;
 
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     VideoPath *videoPath = new VideoPath(&engine);
     QObject::connect(backend, &Backend::currentlyPlayedVideoChanged, videoPath, &VideoPath::setVideoFile);
 
-    engine.rootContext()->setContextProperty("version", version);
+    engine.rootContext()->setContextProperty("appName", app.applicationDisplayName());
     engine.rootContext()->setContextProperty("Backend", backend);
     engine.rootContext()->setContextProperty("VideoPath", videoPath);
 
