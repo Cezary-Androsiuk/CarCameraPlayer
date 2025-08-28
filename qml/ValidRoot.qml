@@ -13,12 +13,18 @@ Item {
     property bool playing: false
     property real volume: 1.0
     onPlayingChanged: {
+        if(!frontVideoLoader.item)
+        {
+            console.warn("front video is reloading... please wait")
+            return;
+        }
+
         if(playing){
-            frontVideo.play();
+            frontVideoLoader.item.frontVideoAlias.play();
             backVideo.play();
         }
         else{
-            frontVideo.pause();
+            frontVideoLoader.item.frontVideoAlias.pause();
             backVideo.pause();
         }
     }
@@ -82,9 +88,15 @@ Item {
                 anchors.fill: parent
 
                 from: 0
-                to: frontVideo.duration
-                value: frontVideo.position
+                to: frontVideoLoader.item ? frontVideoLoader.item.frontVideoAlias.duration : 1
+                value: frontVideoLoader.item ? frontVideoLoader.item.frontVideoAlias.position : 1
                 onPressedChanged: {
+                    if(!frontVideoLoader.item)
+                    {
+                        console.warn("front video is reloading... please wait")
+                        return;
+                    }
+
                     if(!playing)
                         return;
 
@@ -92,19 +104,25 @@ Item {
                     if(pressed)
                     {
                         validRoot.mutedBySlider = true;
-                        frontVideo.muted = true
+                        frontVideoLoader.item.frontVideoAlias.muted = true
                     }
                     else
                     {
                         if(validRoot.mutedBySlider)
                         {
                             validRoot.mutedBySlider = false;
-                            frontVideo.muted = false
+                            frontVideoLoader.item.frontVideoAlias.muted = false
                         }
                     }
                 }
                 onMoved: {
-                    frontVideo.position = value
+                    if(!frontVideoLoader.item)
+                    {
+                        console.warn("front video is reloading... please wait")
+                        return;
+                    }
+
+                    frontVideoLoader.item.frontVideoAlias.position = value
                     backVideo.position = value
                 }
 
@@ -221,16 +239,107 @@ Item {
 
             // Rectangle{anchors.fill: parent; color: "blue"}
 
-            Video{
-                id: frontVideo
-                anchors.fill: parent
-                source: VideoPath.frontVideoFile
-                onSourceChanged: { // buffer
-                    play();
-                    pause()
+            /*
+              Due to only one video component playing sound, when audioOutputDevice change only this one will be recreated
+            */
+
+            Connections{
+                target: AudioMonitor
+                function onMainAudioDeviceChanged(){
+                    console.log("main audio device changed")
+
+                    if(!frontVideoLoader.item)
+                    {
+                        console.warn("front video is reloading... please wait")
+                        return;
+                    }
+
+                    // get informations to restore player
+                    let wasPlaying = frontVideoLoader.item.frontVideoAlias.playing
+                    let playerLastPosition = frontVideoLoader.item.frontVideoAlias.position
+
+                    // pause player
+                    playing = false;
+                    frontVideoLoader.item.frontVideoAlias.pause()
+                    backVideo.pause()
+                    console.log(frontVideoLoader.item.frontVideoAlias.status)
+
+                    // remove old video component
+                    frontVideoLoader.sourceComponent = null;
+
+                    // after loader load it's item and after video was loaded restore player informations:
+                    // let videoLoadedFunction = function(){
+                    //     // no documentation about playbackState nor playbackStateChanged inside Video
+                    //     // console.log("Playing state: ", MediaPlayer.PlayingState)
+                    //     // console.log("Paused state: ", MediaPlayer.PausedState)
+                    //     // console.log("Stopped state: ", MediaPlayer.StoppedState)
+                    //     // console.log("playback state changed to: ", frontVideoLoader.item.frontVideoAlias.playbackState )
+
+                    //     console.log("video loaded")
+
+                    //     frontVideoLoader.item.frontVideoAlias.position = playerLastPosition
+                    //     backVideo.position = playerLastPosition
+
+                    //     if(wasPlaying)
+                    //     {
+                    //         frontVideoLoader.item.frontVideoAlias.play()
+                    //         backVideo.play()
+                    //     }
+                    // }
+                    // let loaderLoadedFunction = function(){
+                    //     frontVideoLoader.item.frontVideoAlias.playbackStateChanged.connect(videoLoadedFunction)
+                    // }
+
+                    // frontVideoLoader.loaded.connect(loaderLoadedFunction)
+
+                    // set new video component
+                    frontVideoLoader.sourceComponent = frontVideoComponent;
+                    let loadingCounter = 0
+                    while(frontVideoLoader.status === Loader.Loading)
+                    {
+                        loadingCounter++;
+                    }
+
+                    console.log("loader loaded with counter: ", loadingCounter)
+
+                    loadingCounter = 0
+                    while(frontVideoLoader.item.frontVideoAlias.status === MediaPlayer.LoadingMedia)
+                    {
+                        loadingCounter++;
+                    }
+                    console.log("loader video with counter: ", loadingCounter, "status: ", frontVideoLoader.item.frontVideoAlias.status)
+
+                    // disconnect ?
                 }
-                volume: validRoot.volume
             }
+
+            Loader{
+                id: frontVideoLoader
+                anchors.fill: parent
+                sourceComponent: frontVideoComponent
+
+                Component{
+                    id: frontVideoComponent
+                    Item{
+                        // without an item object anchors might freak out
+                        anchors.fill: parent
+                        property alias frontVideoAlias: frontVideo
+                        Video{
+                            id: frontVideo
+                            anchors.fill: parent
+                            source: VideoPath.frontVideoFile
+                            onSourceChanged: { // buffer
+                                play();
+                                pause();
+                                // frontVideo.pl
+                            }
+
+                            volume: validRoot.volume
+                        }
+                    }
+                }
+            }
+
         }
 
         Item{
