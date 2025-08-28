@@ -245,12 +245,13 @@ Item {
 
             Connections{
                 target: AudioMonitor
-                function onMainAudioDeviceChanged(){
+                function onMainAudioDeviceChanged(x){
                     console.log("main audio device changed")
 
                     if(!frontVideoLoader.item)
                     {
                         console.warn("front video is reloading... please wait")
+                        AudioMonitor.pleaseResendSignal("mainAudioDeviceChanged")
                         return;
                     }
 

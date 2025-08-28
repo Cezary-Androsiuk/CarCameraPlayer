@@ -2,6 +2,7 @@
 #define AUDIOMONITOR_H
 
 #include <QObject>
+#include <QTimer>
 #include <QMediaDevices>
 
 /*
@@ -18,11 +19,16 @@ class AudioMonitor : public QObject
 public:
     explicit AudioMonitor(QObject *parent = nullptr);
 
+public slots:
+    void pleaseResendSignal(const QString &signal);
+
 signals:
     void mainAudioDeviceChanged();
 
 private:
     QMediaDevices m_mediaDevicesSingleton; /// object is only a reference to a singleton
+    QTimer m_resendTimer;
+    QMetaObject::Connection m_resentTimerConnection;
 };
 
 #endif // AUDIOMONITOR_H
