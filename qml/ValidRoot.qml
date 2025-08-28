@@ -67,7 +67,16 @@ Item {
             }
 
             ControlsPanel{
+                onPlaybackSpeedChanged: {
+                    if(!frontVideoLoader.item)
+                    {
+                        console.warn("front video is reloading... please wait")
+                        return;
+                    }
 
+                    frontVideoLoader.item.frontVideoAlias.playbackRate = playbackSpeed;
+                    backVideo.playbackRate = playbackSpeed;
+                }
             }
         }
 
@@ -295,7 +304,6 @@ Item {
                                 play();
                                 pause();
                             }
-
                             volume: validRoot.volume
                         }
                     }

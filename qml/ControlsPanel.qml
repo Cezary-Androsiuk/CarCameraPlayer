@@ -6,6 +6,8 @@ Item {
     id: controlsPanel
     anchors.fill: parent
 
+    property double playbackSpeed: 1.0
+
     Rectangle{
         anchors{
             top: parent.top
@@ -184,6 +186,72 @@ Item {
             value: 1
             onMoved: {
                 validRoot.volume = value
+            }
+        }
+    }
+
+    Item{
+        z: 1
+        anchors{
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            leftMargin: 20
+        }
+        height: buttonsContainer.height
+        width: height
+
+        Label{
+            id: playbackSpeedLabel
+            anchors{
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+            }
+            height: parent.height * 0.5
+            width: height
+            text: {
+                var strPlaybackSpeed = controlsPanel.playbackSpeed.toString();
+                var spsLength = strPlaybackSpeed.length;
+                if(spsLength === 0) { // empty string
+                    return "0.00" // exception case
+                }
+                else if(spsLength === 1) { // single number
+                    return strPlaybackSpeed + ".00"
+                }
+                else if(spsLength === 3) { // one digit precision
+                    return strPlaybackSpeed + "0";
+                }
+                else { // double digit precision
+                    return strPlaybackSpeed;
+                }
+            }
+        }
+
+        Slider{
+            id: playbackSpeedSlider
+            anchors{
+                verticalCenter: parent.verticalCenter
+                left: playbackSpeedLabel.right
+                leftMargin: 10
+            }
+            height: parent.height
+            width: height*3
+
+            from: 0.25
+            to: 4
+            value: 1
+            stepSize: 0.25
+            onMoved: {
+                // above 2.0 step will be 0.5 not 0.25
+                let modifiedValue = value
+                if(modifiedValue >= 2.0)
+                {
+                    // double only values above 2.0
+                    modifiedValue -= 2.0;
+                    modifiedValue *= 2;
+                    modifiedValue += 2.0;
+                }
+
+                controlsPanel.playbackSpeed = modifiedValue
             }
         }
     }
