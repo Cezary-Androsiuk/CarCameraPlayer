@@ -206,8 +206,14 @@ Item {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
             }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignBottom
+
+            font.bold: true
+            font.pixelSize: 18
+
             height: parent.height * 0.5
-            width: height
+            width: height * 2
             text: {
                 var strPlaybackSpeed = controlsPanel.playbackSpeed.toString();
                 var spsLength = strPlaybackSpeed.length;
@@ -224,6 +230,29 @@ Item {
                     return strPlaybackSpeed;
                 }
             }
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    playbackSpeedSlider.value = 1.0
+                    controlsPanel.playbackSpeed = 1.0
+                    console.log(buttonsContainer.height)
+                }
+            }
+
+        }
+
+        Label{
+            anchors{
+                top: parent.top
+                topMargin: 4
+                horizontalCenter: parent.horizontalCenter
+            }
+            visible: parent.height > 50
+            font.pixelSize: 11
+            opacity: 0.7
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignTop
+            text: "Playback Speed"
         }
 
         Slider{
@@ -237,7 +266,7 @@ Item {
             width: height*3
 
             from: 0.25
-            to: 4
+            to: 4 // realistic is 6
             value: 1
             stepSize: 0.25
             onMoved: {

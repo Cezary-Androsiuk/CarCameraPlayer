@@ -5,7 +5,7 @@ import QtQuick.Dialogs
 
 ApplicationWindow {
     id: root
-    width: 720
+    width: 780
     height: 480
     visible: false
 
