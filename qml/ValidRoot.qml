@@ -255,61 +255,23 @@ Item {
                     }
 
                     // get informations to restore player
-                    let wasPlaying = frontVideoLoader.item.frontVideoAlias.playing
-                    let playerLastPosition = frontVideoLoader.item.frontVideoAlias.position
+                        /// I can't find signal responsible for "mediaLoaded", "videoReady" or something like that,
+                        /// so restoring this is not an option right now but connecting signals are in "bkp" commit
+                        /// signals should be disconnected after usage each time and that is tough due to dynamically loading video element
+                    // let wasPlaying = frontVideoLoader.item.frontVideoAlias.playing
+                    // let playerLastPosition = frontVideoLoader.item.frontVideoAlias.position
 
                     // pause player
                     playing = false;
-                    frontVideoLoader.item.frontVideoAlias.pause()
-                    backVideo.pause()
-                    console.log(frontVideoLoader.item.frontVideoAlias.status)
 
                     // remove old video component
                     frontVideoLoader.sourceComponent = null;
 
-                    // after loader load it's item and after video was loaded restore player informations:
-                    // let videoLoadedFunction = function(){
-                    //     // no documentation about playbackState nor playbackStateChanged inside Video
-                    //     // console.log("Playing state: ", MediaPlayer.PlayingState)
-                    //     // console.log("Paused state: ", MediaPlayer.PausedState)
-                    //     // console.log("Stopped state: ", MediaPlayer.StoppedState)
-                    //     // console.log("playback state changed to: ", frontVideoLoader.item.frontVideoAlias.playbackState )
-
-                    //     console.log("video loaded")
-
-                    //     frontVideoLoader.item.frontVideoAlias.position = playerLastPosition
-                    //     backVideo.position = playerLastPosition
-
-                    //     if(wasPlaying)
-                    //     {
-                    //         frontVideoLoader.item.frontVideoAlias.play()
-                    //         backVideo.play()
-                    //     }
-                    // }
-                    // let loaderLoadedFunction = function(){
-                    //     frontVideoLoader.item.frontVideoAlias.playbackStateChanged.connect(videoLoadedFunction)
-                    // }
-
-                    // frontVideoLoader.loaded.connect(loaderLoadedFunction)
-
                     // set new video component
                     frontVideoLoader.sourceComponent = frontVideoComponent;
-                    let loadingCounter = 0
-                    while(frontVideoLoader.status === Loader.Loading)
-                    {
-                        loadingCounter++;
-                    }
 
-                    console.log("loader loaded with counter: ", loadingCounter)
-
-                    loadingCounter = 0
-                    while(frontVideoLoader.item.frontVideoAlias.status === MediaPlayer.LoadingMedia)
-                    {
-                        loadingCounter++;
-                    }
-                    console.log("loader video with counter: ", loadingCounter, "status: ", frontVideoLoader.item.frontVideoAlias.status)
-
-                    // disconnect ?
+                    // set backVideo also at start
+                    backVideo.position = 0;
                 }
             }
 
@@ -331,7 +293,6 @@ Item {
                             onSourceChanged: { // buffer
                                 play();
                                 pause();
-                                // frontVideo.pl
                             }
 
                             volume: validRoot.volume

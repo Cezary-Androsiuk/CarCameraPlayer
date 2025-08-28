@@ -3,6 +3,7 @@
 #include <QQmlContext>
 
 #include "Backend.h"
+#include "AudioMonitor.h"
 #include "VideoPath.h"
 
 /// works for records gained from 70mai Dash Cam Pro Plus A500S
@@ -18,11 +19,13 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     Backend* backend = new Backend(&engine);
+    AudioMonitor* audioMonitor = new AudioMonitor(&engine);
     VideoPath *videoPath = new VideoPath(&engine);
     QObject::connect(backend, &Backend::currentlyPlayedVideoChanged, videoPath, &VideoPath::setVideoFile);
 
     engine.rootContext()->setContextProperty("appName", app.applicationDisplayName());
     engine.rootContext()->setContextProperty("Backend", backend);
+    engine.rootContext()->setContextProperty("AudioMonitor", audioMonitor);
     engine.rootContext()->setContextProperty("VideoPath", videoPath);
 
     QObject::connect(

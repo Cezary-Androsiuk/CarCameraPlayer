@@ -5,7 +5,7 @@ project(CarCameraPlayer VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/assets/icons/appIcon/appicon.rc")
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Multimedia)
 
 qt_standard_project_setup()
 
@@ -46,6 +46,7 @@ qt_add_qml_module(appCarCameraPlayer
     RESOURCES assets/icons/invisible.svg
     RESOURCES assets/icons/visible.svg
     RESOURCES assets/icons/appIcon/appicon.rc
+    SOURCES sources/AudioMonitor.h sources/AudioMonitor.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -62,6 +63,7 @@ set_target_properties(appCarCameraPlayer PROPERTIES
 
 target_link_libraries(appCarCameraPlayer
     PRIVATE Qt6::Quick
+    Qt6::Multimedia
 )
 
 include(GNUInstallDirs)
