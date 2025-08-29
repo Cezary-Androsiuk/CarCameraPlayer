@@ -28,10 +28,10 @@ public slots:
 private:
     void buildAlternativeFilePath(QString videoFile);
 
-    QString findBackInFile() const;   /// looking for the back file in the front file location        // ./backFile
-    QString findBackOutFile() const;  /// looking for the back file outside the front file location   // ./../Back/backFile
-    QString findFrontInFile() const;  /// looking for the front file in the back file location        // ./frontFile
-    QString findFrontOutFile() const; /// looking for the front file outside the back file location   // ./../Front/frontFile
+    QString findBackInCurrentDir() const;   /// looking for the "back" file in the "front" file location        // ./backFile
+    QString findBackInParentDir() const;    /// looking for the "back" file outside the "front" file location   // ./../Back/backFile
+    QString findFrontInCurrentDir() const;  /// looking for the "front" file in the "back" file location        // ./frontFile
+    QString findFrontInParentDir() const;   /// looking for the "front" file outside the "back" file location   // ./../Front/frontFile
 
     void setFrontVideoFile(QString frontVideoFile);
     void setBackVideoFile(QString backVideoFile);

@@ -1,6 +1,6 @@
 #include "Backend.h"
 
-const char *version = "v1.3.1";
+const char *version = "v1.4.0";
 
 Backend::Backend(QObject *parent)
     : QObject{parent},
@@ -35,7 +35,7 @@ void Backend::validateSelectedFile()
     QString invalidFileReason;
     if(!this->isValidFileName(fileInfo.fileName(), type, invalidFileReason))
     {
-        qDebug() << "selected file" << fileInfo.fileName() << "is not valid";
+        qDebug() << "selected file" << fileInfo.fileName() << "is not valid\n" "reason:" << invalidFileReason << "\n";
         emit this->invalidSelectedFile(invalidFileReason);
         return;
     }
@@ -95,7 +95,7 @@ void Backend::makePlaylist()
         QString invalidFileReason;
         if(!this->isValidFileName(fileName, type, invalidFileReason))
         {
-            qDebug() << "in" << m_parentDirectory << "skip file:" << file << "\n""reason:" << invalidFileReason;
+            qDebug() << "in" << m_parentDirectory << "skip file:" << file << "\n""reason:" << invalidFileReason << "\n";
             continue;
         }
 
@@ -127,35 +127,22 @@ bool Backend::isValidFileName(QString fileName, QChar &type, QString &invalidFil
 {
     type = '\0';
 
-    if(fileName.size() < 7)
+    /// check length of the file name
+    if(fileName.size() < 5)
     {
-        invalidFileReason = QString::asprintf("to short name, expected < 7, got %lld", fileName.size());
-        qDebug() << fileName << invalidFileReason;
-        return false;
-    }
-    QString prefix = fileName.left(2);
-    if(prefix != "EV" && prefix != "NO")
-    {
-        invalidFileReason = "invalid prefix, expected \"EV\" or \"NO\", got \"" + prefix + "\"";
-        qDebug() << fileName << invalidFileReason;
-        return false;
-    }
-    QString postfix = fileName.right(4);
-    if(postfix.toLower() != ".mp4")
-    {
-        invalidFileReason = "invalid postfix, expected \".mp4\", got \"" + postfix + "\"";
-        qDebug() << fileName << invalidFileReason;
-        return false;
-    }
-    QChar localType = fileName.at(fileName.size() -5);
-    if(localType != 'B' && localType != 'F')
-    {
-        invalidFileReason = "invalid type, expected \"B\" or \"F\", got \"" + QString(localType) + "\"";
-        qDebug() << fileName << invalidFileReason;
+        invalidFileReason = QString::asprintf("to short name, expected < 5, got %lld", fileName.size());
         return false;
     }
 
-    type = localType;
+    /// check if last five letters are "B.mp4" or "F.mp4" (case insensitive)
+    QString postfix = fileName.right(5).toUpper();
+    if(postfix != "B.MP4" && postfix != "F.MP4")
+    {
+        invalidFileReason = "invalid postfix, expected \"B.mp4\" or \"F.mp4\" (case insensitive), got \"" + postfix + "\"";
+        return false;
+    }
+
+    type = postfix[0];
     return true;
 }
 
