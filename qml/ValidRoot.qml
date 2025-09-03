@@ -9,6 +9,8 @@ Item {
     id: validRoot
     anchors.fill: parent
 
+    signal reselect();
+
     property bool frontIsMainCamera: true
     property int viewType: 1
     property bool playing: false
@@ -394,7 +396,7 @@ Item {
                     dltImageHover: Qt.resolvedUrl("../assets/icons/opened_folder.svg");
                     dltDescription: "Reselect Video Playlist"
                     onUserClicked: {
-
+                        validRoot.reselect();
                     }
                 }
             }

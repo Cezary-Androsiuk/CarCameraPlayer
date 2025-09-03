@@ -64,6 +64,7 @@ ApplicationWindow {
         anchors.fill: parent
         source: ""
         onLoaded: {
+            // InvalidRoot connections
             // if loader contains item
             if(mainLoader.item){
                 // if that item contains signals "retried" and "exited"
@@ -73,13 +74,26 @@ ApplicationWindow {
                         console.log("user choosed retry")
                         root.hide()
                         fileDialog.open();
+                        mainLoader.source = ""
                     })
                     mainLoader.item.exited.connect(function(){
                         console.log("user choosed exit")
                         Qt.quit()
                     })
                 }
-                // if that item contains signals "retried" and "exited"
+
+                /// ValidRoot connections
+                // if that item contains signal "reselect"
+                if(mainLoader.item.reselect){
+                    // connect slot to it
+                    mainLoader.item.reselect.connect(function(){
+                        console.log("user choosed to reselect file")
+                        root.hide()
+                        fileDialog.open();
+                        mainLoader.source = "";
+                    })
+
+                }
             }
 
         }
