@@ -14,6 +14,11 @@ QString VideoPath::getBackVideoFile() const
     return m_backVideoFile;
 }
 
+bool VideoPath::getAlternativeFileFound() const
+{
+    return m_alternativeFileFound;
+}
+
 void VideoPath::setVideoFile(QString videoFile)
 {
     /// videoFile should be valid (handled in caller)
@@ -23,6 +28,8 @@ void VideoPath::setVideoFile(QString videoFile)
 
 void VideoPath::buildAlternativeFilePath(QString videoFile)
 {
+    /// videoFile should be valid (handled in caller)
+
     if(videoFile[videoFile.size() -5] == 'F') /// front camera was given
     {
         this->setFrontVideoFile(videoFile);
@@ -32,11 +39,13 @@ void VideoPath::buildAlternativeFilePath(QString videoFile)
         if(backVideoFile == "") /// back video file not found
         {
             qInfo() << "back camera file not found";
+            this->setAlternativeFileFound(false);
         }
         else /// back video file found
         {
             qInfo() << "found back file2:" << backVideoFile;
             this->setBackVideoFile(backVideoFile);
+            this->setAlternativeFileFound(true);
             return;
         }
     }
@@ -49,11 +58,13 @@ void VideoPath::buildAlternativeFilePath(QString videoFile)
         if(frontVideoFile == "") /// front video file not found
         {
             qInfo() << "front camera file not found";
+            this->setAlternativeFileFound(false);
         }
         else /// front video file found
         {
             qInfo() << "found front file2:" << frontVideoFile;
             this->setFrontVideoFile(frontVideoFile);
+            this->setAlternativeFileFound(true);
             return;
         }
     }
@@ -201,4 +212,13 @@ void VideoPath::setBackVideoFile(QString backVideoFile)
 
     m_backVideoFile = backVideoFile;
     emit this->backVideoFileChanged();
+}
+
+void VideoPath::setAlternativeFileFound(bool alternativeFileFound)
+{
+    if(alternativeFileFound == m_alternativeFileFound)
+        return;
+
+    m_alternativeFileFound = alternativeFileFound;
+    emit this->alternativeFileFoundChanged();
 }

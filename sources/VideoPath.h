@@ -11,16 +11,19 @@ class VideoPath : public QObject
     Q_OBJECT
     Q_PROPERTY(QString backVideoFile READ getBackVideoFile NOTIFY backVideoFileChanged FINAL)
     Q_PROPERTY(QString frontVideoFile READ getFrontVideoFile NOTIFY frontVideoFileChanged FINAL)
+    Q_PROPERTY(bool alternativeFileFound READ getAlternativeFileFound NOTIFY alternativeFileFoundChanged FINAL)
 
 public:
     explicit VideoPath(QObject *parent = nullptr);
 
     QString getFrontVideoFile() const;
     QString getBackVideoFile() const;
+    bool getAlternativeFileFound() const;
 
 signals:
     void frontVideoFileChanged();
     void backVideoFileChanged();
+    void alternativeFileFoundChanged();
 
 public slots:
     void setVideoFile(QString videoFile);
@@ -37,10 +40,12 @@ private:
 
     void setFrontVideoFile(QString frontVideoFile);
     void setBackVideoFile(QString backVideoFile);
+    void setAlternativeFileFound(bool alternativeFileFound);
 
 private:
     QString m_frontVideoFile;
     QString m_backVideoFile;
+    bool m_alternativeFileFound;
 
 };
 

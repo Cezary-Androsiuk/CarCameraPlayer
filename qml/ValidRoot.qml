@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Controls.Imagine
+import QtQuick.Dialogs
 
 import QtMultimedia
 
@@ -409,16 +410,47 @@ Item {
                     rightMargin: parent.leftTopControlsMargin
                 }
                 height: width
+                visible: !VideoPath.alternativeFileFound
 
                 ImageButton{
                     id: chooseSecondFileButton
+                    enabled: false
                     dltImageIdle: Qt.resolvedUrl("../assets/icons/add_folder");
                     dltImageHover: dltImageIdle
                     dltDescription: "Choose Second File location"
                     onUserClicked: {
-
+                        // there was idea to open file/folder dialog and manually
+                        // select alternative file/file location
+                        // but I can't decide what and how will be de best
+                        // because if user will manually select file, then he could select any video
+                        // if he will select folder then he won't se what files are in that location
+                        // and still he need to select it after every next video (it is selected after each change)
                     }
                 }
+
+            //     FileDialog {
+            //         id: fileDialog
+            //         title: "Select Front or Back video"
+            //         fileMode: FileDialog.OpenFile
+            //         onAccepted: {
+            //             Backend.setSelectedFile(fileDialog.selectedFile)
+            //             // root.visible = true;
+            //             root.showMaximized();
+
+            //             // move window to top
+            //             root.raise();
+            //             root.requestActivate();
+            //         }
+            //         onRejected: {
+            //             Qt.quit()
+            //         }
+            //     }
+
+            //     FolderDialog{
+            //         id: folderDialog
+            //     }
+
+
             }
         }
     }
