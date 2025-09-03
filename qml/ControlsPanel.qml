@@ -31,7 +31,7 @@ Item {
         z: 2
 
         ImageButton{
-            dltImageIdle: Qt.resolvedUrl("../assets/icons/switch.svg")
+            dltImageIdle: Qt.resolvedUrl("../assets/icons/replace.svg")
             dltImageHover: dltImageIdle
             onUserClicked: {
                 validRoot.frontIsMainCamera = !validRoot.frontIsMainCamera

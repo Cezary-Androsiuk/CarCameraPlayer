@@ -332,6 +332,95 @@ Item {
                 }
             }
         }
+
+
+        Item{
+            id: leftTopControls
+            anchors{
+                top: parent.top
+                left: parent.left
+            }
+            readonly property int leftTopControlsMargin: 8
+            // some logic behind fluid size of this area
+            property double sizeRatio: {
+                // size is dynamic in min/max range
+                const minW = 780; // when minimum (or smaller), then sizeRatio is 0
+                const maxW = 1920; // when maximum (or larger), then sizeRatio is 1
+                let w = parent.width;
+                const diffW = maxW - minW;
+                let ratioW = (w - minW) / diffW
+                if(ratioW < 0) ratioW = 0 // limit to 0
+                if(ratioW > 1) ratioW = 1 // limit to 1
+
+                const minH = 403;
+                const maxH = 932;
+                let h = parent.height;
+                const diffH = maxH - minH;
+                let ratioH = (h - minH) / diffH
+                if(ratioH < 0) ratioH = 0 // limit to 0
+                if(ratioH > 1) ratioH = 1 // limit to 1
+
+                const ratio = (ratioW < ratioH) ? ratioW : ratioH; // take smaller
+                return ratio;
+            }
+
+            width: { // for one element in row
+                let w = 40 + 20 * sizeRatio;
+                let margins = leftTopControlsMargin * 2;
+                return w + margins
+            }
+
+            height: { // for two elements in column
+                let h = (40 + 20 * sizeRatio) * 2;
+                let margins = leftTopControlsMargin * 3;
+                return h + margins;
+            }
+
+            Item{
+                anchors{
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: parent.leftTopControlsMargin
+                    topMargin: parent.leftTopControlsMargin
+                    rightMargin: parent.leftTopControlsMargin
+                }
+                height: width
+
+                ImageButton{
+                    id: reselectFolderButton
+                    dltImageIdle: Qt.resolvedUrl("../assets/icons/folder.svg");
+                    dltImageHover: Qt.resolvedUrl("../assets/icons/opened_folder.svg");
+                    dltDescription: "Reselect Video Playlist"
+                    onUserClicked: {
+
+                    }
+                }
+            }
+
+
+            Item{
+                anchors{
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    leftMargin: parent.leftTopControlsMargin
+                    bottomMargin: parent.leftTopControlsMargin
+                    rightMargin: parent.leftTopControlsMargin
+                }
+                height: width
+
+                ImageButton{
+                    id: chooseSecondFileButton
+                    dltImageIdle: Qt.resolvedUrl("../assets/icons/add_folder");
+                    dltImageHover: dltImageIdle
+                    dltDescription: "Choose Second File location"
+                    onUserClicked: {
+
+                    }
+                }
+            }
+        }
     }
 
 }
