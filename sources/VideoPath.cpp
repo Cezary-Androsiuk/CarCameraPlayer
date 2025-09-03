@@ -27,56 +27,66 @@ void VideoPath::buildAlternativeFilePath(QString videoFile)
     {
         this->setFrontVideoFile(videoFile);
 
-        QString backVideoFile;
-        backVideoFile = this->findBackInCurrentDir(); /// if failed returns QString("")
+        QString backVideoFile = this->findBack();  /// if failed returns QString("")
 
-        if(backVideoFile != "") /// findBackInCurrentDir found (the same location)
+        if(backVideoFile == "") /// back video file not found
+        {
+            qInfo() << "back camera file not found";
+        }
+        else /// back video file found
         {
             qInfo() << "found back file2:" << backVideoFile;
             this->setBackVideoFile(backVideoFile);
             return;
         }
-
-        backVideoFile = this->findBackInParentDir(); /// if failed returns QString("")
-
-        if(backVideoFile != "") /// findBackInParentDir found (in outside location)
-        {
-            qInfo() << "found back file2:" << backVideoFile;
-            this->setBackVideoFile(backVideoFile);
-            return;
-        }
-
-        /// back camera file not found
-        qInfo() << "back camera file not found";
     }
     else /// == 'B' /// back camera
     {
         this->setBackVideoFile(videoFile);
 
-        QString frontVideoFile;
-        frontVideoFile = this->findFrontInCurrentDir(); /// if failed returns QString("")
+        QString frontVideoFile = this->findFront();  /// if failed returns QString("")
 
-        if(frontVideoFile != "") /// findFrontInCurrentDir failed (the same location)
+        if(frontVideoFile == "") /// front video file not found
+        {
+            qInfo() << "front camera file not found";
+        }
+        else /// front video file found
         {
             qInfo() << "found front file2:" << frontVideoFile;
             this->setFrontVideoFile(frontVideoFile);
             return;
         }
-
-        frontVideoFile = this->findFrontInParentDir(); /// if failed returns QString("")
-
-        if(frontVideoFile != "") /// findFrontInParentDir failed (in outside location)
-        {
-            qInfo() << "found front file2:" << frontVideoFile;
-            this->setFrontVideoFile(frontVideoFile);
-            return;
-        }
-
-        /// front camera file not found
-        qInfo() << "front camera file not found";
     }
-    qDebug() << videoFile;
-    qDebug() << m_frontVideoFile << m_backVideoFile;
+}
+
+QString VideoPath::findBack() const
+{
+    QString backVideoFile;
+
+    backVideoFile = this->findBackInCurrentDir(); /// if failed returns QString("")
+    if(backVideoFile != "") /// findBackInCurrentDir found (the same location)
+        return backVideoFile;
+
+    backVideoFile = this->findBackInParentDir(); /// if failed returns QString("")
+    if(backVideoFile != "") /// findBackInParentDir found (in outside location)
+        return backVideoFile;
+
+    return backVideoFile;
+}
+
+QString VideoPath::findFront() const
+{
+    QString frontVideoFile;
+
+    frontVideoFile = this->findFrontInCurrentDir(); /// if failed returns QString("")
+    if(frontVideoFile != "") /// findFrontInCurrentDir failed (the same location)
+        return frontVideoFile;
+
+    frontVideoFile = this->findFrontInParentDir(); /// if failed returns QString("")
+    if(frontVideoFile != "") /// findFrontInParentDir failed (in outside location)
+        return frontVideoFile;
+
+    return frontVideoFile;
 }
 
 QString VideoPath::findBackInCurrentDir() const

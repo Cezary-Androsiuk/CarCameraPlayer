@@ -27,6 +27,8 @@ public slots:
 
 private:
     void buildAlternativeFilePath(QString videoFile);
+    QString findBack() const;
+    QString findFront() const;
 
     QString findBackInCurrentDir() const;   /// looking for the "back" file in the "front" file location        // ./backFile
     QString findBackInParentDir() const;    /// looking for the "back" file outside the "front" file location   // ./../Back/backFile
